@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "Actualizando las configuraciones del servidor Nginx"
+
+# iniciar sesion como root
+su
+
+# copio la configuración de nginx.
+cp ${nginx-config:output} /etc/nginx/nginx.conf
+
+# copio la configuración autogenerada del virtualhost para nginx.
+cp ${nginx-vhost-conf:output} /etc/nginx/sites-available/${site-settings:client-name}.vhost.conf
+# activo el virtual host.
+ln -sf /etc/nginx/sites-available/${site-settings:client-name}.vhost.conf /etc/nginx/sites-enabled/default
+
+# reinicio para cargar los cambios.
+service nginx restart
+
+# cerrar la sesion de usuario como root
+exit
