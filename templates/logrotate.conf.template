@@ -42,7 +42,7 @@ ${client3:event-log} ${client3:z2-log} {
 ${client4:event-log} ${client4:z2-log} {
     sharedscripts
     postrotate
-        /bin/kill -USR2 $(cat ${client2:pid-file})
+        /bin/kill -USR2 $(cat ${client4:pid-file})
     endscript
 }
 

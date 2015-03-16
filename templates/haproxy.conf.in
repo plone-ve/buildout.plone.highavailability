@@ -87,5 +87,5 @@ backend ${haproxy-settings:backend}
   # "rise 1" means consider Zope up after 1 successful health check
   server  zope0101 ${hosts:client1}:${ports:client1} cookie z0101 check maxconn 1 maxqueue 2
   server  zope0102 ${hosts:client2}:${ports:client2} cookie z0102 check maxconn 1 maxqueue 2
-  server  zope0103 ${hosts:client3}:${ports:client3} cookie z0102 check maxconn 1 maxqueue 2
-  server  zope0104 ${hosts:client4}:${ports:client4} cookie z0102 check maxconn 1 maxqueue 2
+  server  zope0103 ${hosts:client3}:${ports:client3} cookie z0103 check maxconn 1 maxqueue 2
+  server  zope0104 ${hosts:client4}:${ports:client4} cookie z0104 check maxconn 1 maxqueue 2

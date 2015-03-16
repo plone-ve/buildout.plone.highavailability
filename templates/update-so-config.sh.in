@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Actualizando las configuraciones del servidor Nginx"
+echo "Actualizando las configuraciones del servidor Nginx y servicio Munin"
 
 # iniciar sesion como root
 su
@@ -14,7 +14,26 @@ cp ${nginx-vhost-conf:output} /etc/nginx/sites-available/${site-settings:client-
 ln -sf /etc/nginx/sites-available/${site-settings:client-name}.vhost.conf /etc/nginx/sites-enabled/default
 
 # reinicio para cargar los cambios.
-service nginx restart
+sudo service nginx restart
+
+# copio la configuración de los plugins de munin.
+sudo cp ${munin-plugin-config:output} /etc/munin/plugin-conf.d/munin-plugin-${site-settings:client-name}.conf
+
+# habilito los plugins de munin
+#pushd /etc/munin
+#pushd plugins
+#for plugin in $(ls ${buildout:bin-directory}/{haproxy,nginx,${site-settings:client-name}}_*)
+#do
+#    sudo ln -fs $plugin
+#done
+#popd
+#pushd plugin-conf.d
+#cat ${munin-plugin-config:output} | sudo tee -a munin-node
+#popd
+#popd
+
+# reinicio munin-node
+service munin-node restart
 
 # cerrar la sesion de usuario como root
 exit

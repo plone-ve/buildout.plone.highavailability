@@ -58,6 +58,25 @@ server {
     #    add_header Cache-Control public;
     #}
 
+    # cyn.in adminitration docs location
+    location ~ ^/manuales/(.*)$ {
+        alias   ${buildout:directory}/docs/_build/html/$1;
+
+        index index.html;
+    }
+
+    # ZMI from instance-debug location.
+    #location ~ ^/zmi-admin/(.*)$ {
+    #        #rewrite ^/zmi-admin/(.)$ /$1 break;
+    #        rewrite ^/zmi-admin/(.*)$ /$1 break;
+    #        proxy_read_timeout 3601;
+    #        proxy_connect_timeout 3601;
+    #        proxy_pass http://zmi;
+    #        proxy_set_header Host $host;
+    #        proxy_set_header X-Real-IP $remote_addr;
+    #        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    #}
+
     #Estas reglas de rewrite  deben de ir antes de "location /"" por que tienen que procesarse
     #antes que plone
     location ~ ^/haproxy-stats/(.*)$ {
@@ -66,6 +85,35 @@ server {
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP       $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location ~ ^/haproxy-ping$ {
+        rewrite ^/haproxy/(.*)$ /haproxy-ping break;
+        proxy_pass http://haproxy;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP       $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # pagina de status
+    #location = /nginx-status {
+    #        stub_status on;
+    #        access_log off;
+    #        allow 127.0.0.1;
+    #        deny all;
+    #}
+
+    location /munin/static/ {
+        alias /etc/munin/static/;
+        expires modified +1w;
+    }
+
+    location /munin/ {
+        alias                   /var/cache/munin/www/;
+    #    autoindex               on;
+    #    auth_basic              "Access Restricted - Munin statistics website";
+    #    auth_basic_user_file    /etc/munin/munin_htpasswd
+        expires modified +310s;
     }
 
     # default root directory on debian based system.
