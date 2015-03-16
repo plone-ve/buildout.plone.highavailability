@@ -1,4 +1,4 @@
 [buildout]
 #extends = buildout.d/development.cfg
 #extends = buildout.d/staging.cfg
-extends = buildout.d/production.cfg
+#extends = buildout.d/production.cfg
