@@ -21,3 +21,9 @@ La instalación la realiza con los siguientes comandos: ::
 .. _buildout: http://plone-spanish-docs.readthedocs.org/en/latest/buildout/replicacion_proyectos_python.html
 .. _Buildout para instalar de todas las partes de un sitio: https://plone-spanish-docs.readthedocs.org/en/latest/buildout/plone_esquema_alta_disponibilidad.html
 .. _Plone: http://es.wikipedia.org/wiki/Plone
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/plone-ve/buildout.plone.highavailability/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+
