@@ -58,24 +58,12 @@ server {
     #    add_header Cache-Control public;
     #}
 
-    # cyn.in adminitration docs location
-    location ~ ^/manuales/(.*)$ {
+    # Adminitration docs location
+    location ~ ^/docs/(.*)$ {
         alias   ${buildout:directory}/docs/_build/html/$1;
 
         index index.html;
     }
-
-    # ZMI from instance-debug location.
-    #location ~ ^/zmi-admin/(.*)$ {
-    #        #rewrite ^/zmi-admin/(.)$ /$1 break;
-    #        rewrite ^/zmi-admin/(.*)$ /$1 break;
-    #        proxy_read_timeout 3601;
-    #        proxy_connect_timeout 3601;
-    #        proxy_pass http://zmi;
-    #        proxy_set_header Host $host;
-    #        proxy_set_header X-Real-IP $remote_addr;
-    #        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    #}
 
     #Estas reglas de rewrite  deben de ir antes de "location /"" por que tienen que procesarse
     #antes que plone
